@@ -22,6 +22,7 @@ services:
       restart: always
       environment:
              # - DOCKERVERSION=
+             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
              - OPERATOR=${OPERATOR}
              - STUDIO_NAME=${STUDIO_NAME}
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
