@@ -3,6 +3,7 @@ version: '2.4'
 volumes:
  studio-db_vol01:
  studio-web_vol01:
+ ssl-certificates_vol01:
 
 services:
 
@@ -33,6 +34,7 @@ services:
               - 8043:443
       volumes:
           - 'studio-web_vol01:/var/www/'
+          - 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
       depends_on:
         - "studio-db"
       links:
