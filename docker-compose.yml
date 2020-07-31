@@ -34,7 +34,7 @@ services:
               - 8043:443
       volumes:
           - 'studio-web_vol01:/var/www/'
-          - 'ssl-certificates_vol01:/root/hm_ssl_certificates/'
+          - 'ssl-certificates_vol01:/root/ssl_certificates/'
       depends_on:
         - "studio-db"
       links:
