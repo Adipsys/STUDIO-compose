@@ -30,8 +30,8 @@ services:
              - UPDATE_SQL=no
              - ADMIN_PASSWD=${ADMIN_PASSWD}
       ports:
-              - 8081:80
-              - 8043:443
+              - ${WEB_IHM_PORT}:80
+              - ${WEB_IHM_SSL_PORT}:443
       volumes:
           - 'studio-web_vol01:/var/www/'
           - 'ssl-certificates_vol01:/root/ssl_certificates/'
