@@ -1,0 +1,39 @@
+version: '3.7'
+
+volumes:
+ studio-db_vol01:
+ studio-web_vol01:
+ ssl-certificates_vol01:
+
+services:
+
+ studio-db:
+    image: docker.adipsys.com:5000/studio-ha-db
+    restart: always
+    environment:
+      - DB_SERVICE_NAME=dbcluster
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - BOOTSTRAP=no
+    volumes:
+          - 'studio-db_vol01:/var/lib/mysql/'
+
+ studio-web:
+      image: docker.adipsys.com:5000/studio-ha-web
+      hostname: studio
+      restart: always
+      environment:
+             # - DOCKERVERSION=
+             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+             - OPERATOR=${OPERATOR}
+             - STUDIO_NAME=${STUDIO_NAME}
+             - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
+             - UPDATE_SQL=no
+             - ADMIN_PASSWD=${ADMIN_PASSWD}
+      ports:
+              - 8081:80
+              - 8043:443
+      volumes:
+          - 'studio-web_vol01:/var/www/'
+          - 'ssl-certificates_vol01:/root/ssl_certificates/'
+      depends_on:
+        - "studio-db"
