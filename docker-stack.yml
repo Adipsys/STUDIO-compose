@@ -14,6 +14,11 @@ services:
       - DB_SERVICE_NAME=dbcluster
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - BOOTSTRAP=no
+    deploy:
+      placement:
+             max_replicas_per_node: 1
+             constraints:
+                 - node.role == manager
     volumes:
           - 'studio-db_vol01:/var/lib/mysql/'
 
@@ -29,6 +34,11 @@ services:
              - OPERATOR_SUPPORT_EMAIL=${OPERATOR_SUPPORT_EMAIL}
              - UPDATE_SQL=no
              - ADMIN_PASSWD=${ADMIN_PASSWD}
+      deploy:
+         placement:
+             max_replicas_per_node: 1
+             constraints:
+                 - node.role == manager
       ports:
               - ${WEB_IHM_PORT}:80
               - ${WEB_IHM_SSL_PORT}:443
