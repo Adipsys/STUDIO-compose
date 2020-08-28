@@ -24,6 +24,22 @@ services:
     volumes:
           - 'studio-db_vol01:/var/lib/mysql/'
 
+# studio-dbX:
+#    image: docker.adipsys.com:5000/studio-ha-db
+#    restart: always
+#    command: node studio-db
+#    environment:
+#      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_ROOT_HOST=%
+#    deploy:
+#      placement:
+#             #max_replicas_per_node: 1
+#             constraints:
+#                 - node.role != manager
+#    volumes:
+#          - 'studio-db_vol01:/var/lib/mysql/'
+
  studio-web:
       image: docker.adipsys.com:5000/studio-ha-web
       hostname: studio
