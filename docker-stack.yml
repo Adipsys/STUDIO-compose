@@ -10,13 +10,15 @@ services:
  studio-db:
     image: docker.adipsys.com:5000/studio-ha-db
     restart: always
+    command: seed    
+#   command: node studio-dbX
     environment:
-      - DB_SERVICE_NAME=dbcluster
+      - XTRABACKUP_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - BOOTSTRAP=no
+      - MYSQL_ROOT_HOST=%
     deploy:
       placement:
-          #   max_replicas_per_node: 1
+             #max_replicas_per_node: 1
              constraints:
                  - node.role == manager
     volumes:
